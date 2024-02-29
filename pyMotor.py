@@ -2,27 +2,27 @@ import RPi.GPIO as GPIO
 import time
 
 # Définition des broches pour le contrôle du premier moteur
-motor1_pwm = 18  # Broche PWM pour le premier moteur
-motor1_dir = 23  # Broche IN1 pour le premier moteur
+pin_motor1_pwm = 18  # Broche PWM pour le premier moteur
+pin_motor1_dir = 12  # Broche IN1 pour le premier moteur
 
 # Définition des broches pour le contrôle du deuxième moteur
-motor2_pwm = 17  # Broche PWM pour le deuxième moteur
-motor2_dir = 22  # Broche IN1 pour le deuxième moteur
+pin_motor2_pwm = 17  # Broche PWM pour le deuxième moteur
+pin_motor2_dir = 22  # Broche IN1 pour le deuxième moteur
 
 # Configuration de la bibliothèque RPi.GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(True)
 
 # Configuration des broches en tant que sortie
-GPIO.setup(motor1_pwm, GPIO.OUT)
-GPIO.setup(motor1_dir, GPIO.OUT)
+GPIO.setup(pin_motor1_pwm, GPIO.OUT)
+GPIO.setup(pin_motor1_dir, GPIO.OUT)
 
-GPIO.setup(motor2_pwm, GPIO.OUT)
-GPIO.setup(motor2_dir, GPIO.OUT)
+GPIO.setup(pin_motor2_pwm, GPIO.OUT)
+GPIO.setup(pin_motor2_dir, GPIO.OUT)
 
 # Création des objets PWM pour contrôler la vitesse des moteurs
-motor1 = GPIO.PWM(motor1_pwm, 100)  # Fréquence de PWM : 100 Hz
-motor2 = GPIO.PWM(motor2_pwm, 100)
+motor1 = GPIO.PWM(pin_motor1_pwm, 100)  # Fréquence de PWM : 100 Hz
+motor2 = GPIO.PWM(pin_motor2_pwm, 100)
 
 # Démarrage des objets PWM avec un rapport cyclique de 0 (arrêt)
 motor1.start(0)
@@ -34,7 +34,7 @@ def motor1_forward(speed):
     # Low     X(Don’t care)     Low         Low
     # High    Low               High        Low
     # High    High              Low         High
-    GPIO.output(motor1_dir, GPIO.HIGH)
+    GPIO.output(pin_motor1_dir, GPIO.HIGH)
     motor1.ChangeDutyCycle(speed)
 
 # Fonction pour faire tourner le premier moteur dans le sens anti-horaire
@@ -43,7 +43,7 @@ def motor1_backward(speed):
     # Low     X(Don’t care)     Low         Low
     # High    Low               High        Low
     # High    High              Low         High
-    GPIO.output(motor1_dir, GPIO.LOW)
+    GPIO.output(pin_motor1_dir, GPIO.LOW)
     motor1.ChangeDutyCycle(speed)
 
 # Fonction pour arrêter le premier moteur
@@ -56,7 +56,7 @@ def motor2_forward(speed):
     # Low     X(Don’t care)     Low         Low
     # High    Low               High        Low
     # High    High              Low         High
-    GPIO.output(motor2_dir, GPIO.HIGH)
+    GPIO.output(pin_motor2_dir, GPIO.HIGH)
     motor2.ChangeDutyCycle(speed)
 
 # Fonction pour faire tourner le 2e  moteur dans le sens anti-horaire
@@ -65,7 +65,7 @@ def motor2_backward(speed):
     # Low     X(Don’t care)     Low         Low
     # High    Low               High        Low
     # High    High              Low         High
-    GPIO.output(motor2_dir, GPIO.LOW)
+    GPIO.output(pin_motor2_dir, GPIO.LOW)
     motor2.ChangeDutyCycle(speed)
 
 # Fonction pour arrêter le premier moteur
