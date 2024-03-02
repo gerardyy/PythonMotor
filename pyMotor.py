@@ -1,13 +1,19 @@
 import RPi.GPIO as GPIO
 import time
 
+# GND     = broche 3 à partir du haut -jaune- au bout
+# GPIO-16 = broche 3  partir de la fin i- blanc blanc - PWM1
+# GPIO_12 = broche 5 à partir de la fin - jaune rouge orange -DIR1
+# GPIO_17 = broche 6 à partir du haut autre rangée - vert - DIR2
+# GPIO_22 = broche 8 à partir du haut autre rangée - bleu marron+blanc-
+
 # Définition des broches pour le contrôle du premier moteur
-pin_motor1_pwm = 18  # Broche PWM pour le premier moteur
-pin_motor1_dir = 12  # Broche IN1 pour le premier moteur
+pin_motor1_pwm = 16  # Broche PWM pour le premier moteur
+pin_motor1_dir = 12  # Broche DIR1 pour le premier moteur
 
 # Définition des broches pour le contrôle du deuxième moteur
 pin_motor2_pwm = 17  # Broche PWM pour le deuxième moteur
-pin_motor2_dir = 22  # Broche IN1 pour le deuxième moteur
+pin_motor2_dir = 22  # Broche DIR2 pour le deuxième moteur
 
 # Configuration de la bibliothèque RPi.GPIO
 GPIO.setmode(GPIO.BCM)
@@ -74,27 +80,30 @@ def motor2_stop():
 
 
 # Test des fonctions de contrôle des moteurs
+motor1_forward(50)  # Faire tourner le premier moteur dans le sens horaire à 50% de sa vitesse
+
 try:
-    print ("try")
+   # print ("try")
     while True:
-        motor1_forward(50)  # Faire tourner le premier moteur dans le sens horaire à 50% de sa vitesse
-        motor2_backward(75)  # Faire tourner le deuxième moteur dans le sens horaire à 75% de sa vitesse
-        time.sleep(2)
-
-        print ("stop")
-        motor1_stop()  # Arrêter le premier moteur
-        motor2_stop()  # Arrêter le deuxième moteur
-        time.sleep(1)
-
-        print ("forward")
-        motor1_forward(60)  # Faire tourner le premier moteur dans le sens anti-horaire à 60% de sa vitesse
-        motor2_forward(40)  # Faire tourner le deuxième moteur dans le sens anti-horaire à 40% de sa vitesse
-        time.sleep(2)
-
-        print ("stop")
-        motor1_stop()  # Arrêter le premier moteur
-        motor2_stop()  # Arrêter le deuxième moteur
-        time.sleep(1)
+         time.sleep(10)
+   #     motor1_forward(50)  # Faire tourner le premier moteur dans le sens horaire à 50% de sa vitesse
+   #     motor2_backward(75)  # Faire tourner le deuxième moteur dans le sens horaire à 75% de sa vitesse
+   #     time.sleep(2)
+#
+#        print ("stop")
+#        motor1_stop()  # Arrêter le premier moteur
+#        motor2_stop()  # Arrêter le deuxième moteur
+#        time.sleep(1)
+#
+#        print ("forward")
+#        motor1_forward(60)  # Faire tourner le premier moteur dans le sens anti-horaire à 60% de sa vitesse
+#        motor2_forward(40)  # Faire tourner le deuxième moteur dans le sens anti-horaire à 40% de sa vitesse
+#        time.sleep(2)
+#
+#        print ("stop")
+#        motor1_stop()  # Arrêter le premier moteur
+#        motor2_stop()  # Arrêter le deuxième moteur
+#        time.sleep(1)
 
 except KeyboardInterrupt:
     print ("ctrl C")
